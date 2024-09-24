@@ -9,6 +9,8 @@ router.post("/register", async (req, res) => {
   try {
     const { username, password } = req.body;
 
+    console.log("Register api called");
+
     const hashedPassword = await brcypt.hash(password, 10);
 
     const user = new User({ username, password: hashedPassword });
@@ -23,6 +25,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
+    console.log("Login api called");
     const { username, password } = req.body;
 
     const user = await User.findOne({ username });
@@ -46,6 +49,5 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ error: "Login failed" });
   }
 });
-
 
 module.exports = router;
